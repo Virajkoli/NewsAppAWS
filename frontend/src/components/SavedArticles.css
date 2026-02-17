@@ -1,0 +1,22 @@
+.saved-articles {
+  padding: 2rem 0;
+  min-height: calc(100vh - 200px);
+}
+
+.page-title {
+  font-size: 2rem;
+  color: #1a1a2e;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.no-saved {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #666;
+}
+
+.no-saved p {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
