@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import "./App.css";
 import NewsList from "./components/NewsList";
 import SavedArticles from "./components/SavedArticles";
 import SearchBar from "./components/SearchBar";
@@ -21,13 +20,24 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
-        <header className="app-header">
-          <div className="container">
-            <h1>📰 News App</h1>
-            <nav className="nav-links">
-              <Link to="/">Home</Link>
-              <Link to="/saved">Saved Articles</Link>
+      <div className="min-h-screen">
+        {/* Header */}
+        <header className="bg-accent text-white py-4 shadow-md">
+          <div className="max-w-6xl mx-auto px-4 flex justify-between items-center">
+            <h1 className="text-3xl font-bold">📰 News App</h1>
+            <nav className="flex gap-6">
+              <Link
+                to="/"
+                className="text-white no-underline font-medium hover:text-primary transition-colors"
+              >
+                Home
+              </Link>
+              <Link
+                to="/saved"
+                className="text-white no-underline font-medium hover:text-primary transition-colors"
+              >
+                Saved Articles
+              </Link>
             </nav>
           </div>
         </header>
@@ -40,15 +50,17 @@ function App() {
                 <SearchBar onSearch={setSearchQuery} />
 
                 {!searchQuery && (
-                  <div className="categories">
-                    <div className="container">
-                      <div className="category-buttons">
+                  <div className="bg-white py-4 mb-8 shadow-sm">
+                    <div className="max-w-6xl mx-auto px-4">
+                      <div className="flex gap-2 flex-wrap">
                         {categories.map((category) => (
                           <button
                             key={category}
-                            className={
-                              selectedCategory === category ? "active" : ""
-                            }
+                            className={`px-5 py-2 border-2 border-primary rounded-full font-medium cursor-pointer transition-all ${
+                              selectedCategory === category
+                                ? "bg-primary text-white"
+                                : "bg-white text-primary hover:bg-primary hover:text-white"
+                            }`}
                             onClick={() => setSelectedCategory(category)}
                           >
                             {category.charAt(0).toUpperCase() +

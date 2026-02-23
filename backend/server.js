@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const express = require("express");
+const path = require("path");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const newsRoutes = require("./routes/newsRoutes");
@@ -21,6 +22,15 @@ app.use("/api/news", newsRoutes);
 app.get("/api/health", (req, res) => {
   res.json({ status: "OK", message: "Server is running" });
 });
+
+// Serve frontend static files in production only
+if (process.env.NODE_ENV === "production") {
+  const frontendDist = path.join(__dirname, "..", "frontend", "dist");
+  app.use(express.static(frontendDist));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(frontendDist, "index.html"));
+  });
+}
 
 // MongoDB Connection
 mongoose

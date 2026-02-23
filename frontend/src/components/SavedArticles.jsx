@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { getSavedArticles, deleteSavedArticle } from "../services/api";
 import NewsCard from "./NewsCard";
-import "./SavedArticles.css";
 
 const SavedArticles = () => {
   const [savedArticles, setSavedArticles] = useState([]);
@@ -45,25 +44,35 @@ const SavedArticles = () => {
   };
 
   if (loading) {
-    return <div className="loading">Loading saved articles...</div>;
+    return (
+      <div className="text-center py-12 text-lg text-gray-500">
+        Loading saved articles...
+      </div>
+    );
   }
 
   if (error) {
-    return <div className="error">Error: {error}</div>;
+    return (
+      <div className="text-center py-12 text-lg text-danger">
+        Error: {error}
+      </div>
+    );
   }
 
   return (
-    <div className="saved-articles">
-      <div className="container">
-        <h2 className="page-title">Saved Articles</h2>
+    <div className="py-8 min-h-[calc(100vh-200px)]">
+      <div className="max-w-6xl mx-auto px-4">
+        <h2 className="text-3xl font-bold text-accent mb-8 text-center">
+          Saved Articles
+        </h2>
 
         {savedArticles.length === 0 ? (
-          <div className="no-saved">
-            <p>No saved articles yet.</p>
-            <p>Start saving articles from the home page!</p>
+          <div className="text-center py-16 text-gray-500">
+            <p className="text-xl mb-2">No saved articles yet.</p>
+            <p className="text-xl">Start saving articles from the home page!</p>
           </div>
         ) : (
-          <div className="news-grid">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {savedArticles.map((article) => (
               <NewsCard
                 key={article._id}
